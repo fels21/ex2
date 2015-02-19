@@ -2,6 +2,8 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class GestorBD {
@@ -22,6 +24,15 @@ public class GestorBD {
         Statement update = conn.createStatement();
         String valors = "'" + dni + "','" + nom + "','" + mail + "'";
         update.executeUpdate("INSERT INTO estudiants VALUES(" + valors + ")");
+    }
+    public ResultSet buscar() throws SQLException{
+        Statement select = conn.createStatement();
+        String sql = "select * from estudiants";
+        ResultSet m1 = select.executeQuery(sql);
+        
+
+        
+        return m1;
     }
     
 }

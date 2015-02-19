@@ -129,22 +129,22 @@ public class estudiant extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-            String dni = jTextPane1.getText();
-            String nom = jTextPane2.getText();
-            String mail = jTextPane3.getText(); 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        String dni = jTextPane1.getText();
+        String nom = jTextPane2.getText();
+        String mail = jTextPane3.getText(); 
         try {
             gestor.afegirClient(dni, nom, mail);
         } catch (Exception ex) {
             Logger.getLogger(estudiant.class.getName()).log(Level.SEVERE, null, ex);
         }
-            setVisible(false);
-            dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
-            dispose();
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

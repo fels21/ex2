@@ -27,6 +27,19 @@ public class grafic extends javax.swing.JFrame {
             }
         });
         
+        jMenuItem2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                professor prof = new professor();
+                prof.setVisible(true);
+            }
+        });
+        jMenuItem3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                assignatura assig = new assignatura();
+                assig.setVisible(true);
+            }
+        });
+        
         
     }
 

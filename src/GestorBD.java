@@ -25,13 +25,11 @@ public class GestorBD {
         String valors = "'" + dni + "','" + nom + "','" + mail + "'";
         update.executeUpdate("INSERT INTO estudiants VALUES(" + valors + ")");
     }
-    public ResultSet buscar() throws SQLException{
+    
+    public ResultSet buscar(String x) throws SQLException{
         Statement select = conn.createStatement();
-        String sql = "select * from estudiants";
+        String sql = "select * from " + x;
         ResultSet m1 = select.executeQuery(sql);
-        
-
-        
         return m1;
     }
     

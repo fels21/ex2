@@ -39,11 +39,21 @@ public class buscar extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -60,44 +70,64 @@ public class buscar extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("tab1", jPanel1);
+        jTabbedPane1.addTab("Estudiants", jPanel1);
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane2.setViewportView(jTextArea2);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 363, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 182, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jTabbedPane1.addTab("tab2", jPanel2);
+        jTabbedPane1.addTab("Professors", jPanel2);
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane3.setViewportView(jTextArea3);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 363, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 182, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jTabbedPane1.addTab("tab3", jPanel3);
+        jTabbedPane1.addTab("Assignatures", jPanel3);
 
         jLabel1.setFont(new java.awt.Font("DejaVu Sans", 0, 24)); // NOI18N
         jLabel1.setText("Buscar");
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Consultar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -136,30 +166,105 @@ public class buscar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
         String arr = null;
         ResultSet m1 = null;
-        try {
-            m1 = gestor.buscar();
-        } catch (SQLException ex) {
-            Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            while (m1.next()) {
-                String em = m1.getString("DNI");
-                arr = em.replace("\n", ",");
-                jTextArea1.append(arr+"\t");
-                em = m1.getString("NOM");
-                arr = em.replace("\n", ",");
-                jTextArea1.append(arr+"\t");
-                em = m1.getString("ADREÇA");
-                arr = em.replace("\n", ",");
-                jTextArea1.append(arr+"\n");
+        boolean principi = true;
+        
+        int ordere = jTabbedPane1.getSelectedIndex();
+        
+        if (ordere == 0){
+            jTextArea1.setText(null);
+            try {
+                m1 = gestor.buscar("estudiants");
+            } catch (SQLException ex) {
+                Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                jTextArea1.append("DNI\t");
+                jTextArea1.append("NOM\t");
+                jTextArea1.append("ADREÇA\n");
+                while (m1.next()) {
+                    String em = m1.getString("DNI");
+                    arr = em.replace("\n", ",");
+                    jTextArea1.append(arr+"\t");
+                    em = m1.getString("NOM");
+                    arr = em.replace("\n", ",");
+                    jTextArea1.append(arr+"\t");
+                    em = m1.getString("ADREÇA");
+                    arr = em.replace("\n", ",");
+                    jTextArea1.append(arr+"\n");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        
+        if (ordere == 1){
+            jTextArea2.setText(null);
+            try {
+                m1 = gestor.buscar("professors");
+                    while (m1.next()) {
+                        if(principi){
+                            jTextArea2.append("DNI\t");
+                            jTextArea2.append("NOM\t");
+                            jTextArea2.append("DEPARTAMENT\n");
+                            principi = false;
+                        }
+                    
+                        String em = m1.getString("DNI");
+                        arr = em.replace("\n", ",");
+                        jTextArea2.append(arr+"\t");
+                        em = m1.getString("NOM");
+                        arr = em.replace("\n", ",");
+                        jTextArea2.append(arr+"\t");
+                        em = m1.getString("DEPARTAMENT");
+                        arr = em.replace("\n", ",");
+                        jTextArea2.append(arr+"\n");
+                    }
+                    if(principi){
+                        jTextArea2.append("Actualment no ian professors");
+                        principi = false;
+                    }
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        if (ordere == 2){
+            jTextArea2.setText(null);
+            try {
+                m1 = gestor.buscar("assignatures");
+            } catch (SQLException ex) {
+                Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                jTextArea3.append("NOM\t");
+                jTextArea3.append("CREDITS\t");
+                jTextArea3.append("DESCRIPCIO\n");
+                while (m1.next()) {
+                    String em = m1.getString("NOM");
+                    arr = em.replace("\n", ",");
+                    jTextArea3.append(arr+"\t");
+                    em = m1.getString("CREDITS");
+                    arr = em.replace("\n", ",");
+                    jTextArea3.append(arr+"\t");
+                    em = m1.getString("DESCRIPCIO");
+                    arr = em.replace("\n", ",");
+                    jTextArea3.append(arr+"\n");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(buscar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -203,7 +308,11 @@ public class buscar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
     // End of variables declaration//GEN-END:variables
 }

@@ -38,6 +38,7 @@ public class assignatura extends javax.swing.JFrame {
                 String nom = jTextPane1.getText();
                 int credits = Integer.parseInt(jTextPane2.getText());
                 String descripcio = jTextPane3.getText();
+                
                 int index = jComboBox1.getSelectedIndex();
                 String dni_prof = (String) jComboBox1.getItemAt(index);
 
@@ -77,7 +78,7 @@ public class assignatura extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("NOM");
 

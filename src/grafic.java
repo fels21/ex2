@@ -40,6 +40,13 @@ public class grafic extends javax.swing.JFrame {
             }
         });
         
+        jMenuItem4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                assig_prof aprof = new assig_prof();
+                aprof.setVisible(true);
+            }
+        });
+        
         
     }
 

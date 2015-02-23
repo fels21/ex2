@@ -56,4 +56,19 @@ public class GestorBD {
         
     }
     
+    public List<Assginatura> getAsssignatures(String b) throws SQLException {
+        
+        String busc = b;
+        Statement select = conn.createStatement();
+        String sql = "select * from assignatures where dni_prof='"+busc+"'";
+        ResultSet assig = select.executeQuery(sql);
+        LinkedList<Assginatura> llista = new LinkedList<Assginatura>();
+
+        while(assig.next()){
+            llista.add(new Assginatura(assig.getString("nom"),assig.getInt("credits"),assig.getString("descripcio"),assig.getString("dni_prof")));
+        }
+        return llista;
+        
+    }
+    
 }

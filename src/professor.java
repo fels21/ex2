@@ -22,21 +22,6 @@ public class professor extends javax.swing.JFrame {
         initComponents();
         try {
             gestor = new GestorBD();
-            jButton1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String dni = jTextPane1.getText();
-                String nom = jTextPane2.getText();
-                String departament = jTextPane3.getText();
-
-                try {
-                gestor.afegirProfessor(dni, nom, departament);
-                } catch (Exception ex) {
-                Logger.getLogger(professor.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                setVisible(false);
-            }
-            });
         } catch (Exception ex) {
             Logger.getLogger(professor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,6 +63,11 @@ public class professor extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTextPane3);
 
         jButton1.setText("Afegir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,6 +113,20 @@ public class professor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String dni = jTextPane1.getText();
+        String nom = jTextPane2.getText();
+        String departament = jTextPane3.getText();
+
+        try {
+            gestor.afegirProfessor(dni, nom, departament);
+        } catch (Exception ex) {
+            Logger.getLogger(professor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

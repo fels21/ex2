@@ -32,25 +32,6 @@ public class assignatura extends javax.swing.JFrame {
                 Professor prof = (Professor)it.next();
                 jComboBox1.addItem(prof.getDni());
             }
-            
-            jButton1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String nom = jTextPane1.getText();
-                int credits = Integer.parseInt(jTextPane2.getText());
-                String descripcio = jTextPane3.getText();
-                
-                int index = jComboBox1.getSelectedIndex();
-                String dni_prof = (String) jComboBox1.getItemAt(index);
-
-                try {
-                gestor.afegirAssignatura(nom, credits, descripcio, dni_prof);
-                } catch (Exception ex) {
-                Logger.getLogger(assignatura.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                setVisible(false);
-            }
-            });
         } catch (Exception ex) {
             Logger.getLogger(assignatura.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -153,7 +134,20 @@ public class assignatura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String nom = jTextPane1.getText();
+        int credits = Integer.parseInt(jTextPane2.getText());
+        String descripcio = jTextPane3.getText();
+                
+        int index = jComboBox1.getSelectedIndex();
+        String dni_prof = (String) jComboBox1.getItemAt(index);
+
+        try {
+            gestor.afegirAssignatura(nom, credits, descripcio, dni_prof);
+        } catch (Exception ex) {
+            Logger.getLogger(assignatura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

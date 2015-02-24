@@ -1,8 +1,7 @@
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,21 +21,6 @@ public class estudiant extends javax.swing.JFrame {
         initComponents();
         try {
             gestor = new GestorBD();
-            jButton1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            String dni = jTextPane1.getText();
-            String nom = jTextPane2.getText();
-            String mail = jTextPane3.getText();
-            
-            try {
-            gestor.afegirEstudiant(dni, nom, mail);
-            } catch (Exception ex) {
-            Logger.getLogger(estudiant.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            setVisible(false);
-            }
-            });
         } catch (Exception ex) {
             Logger.getLogger(estudiant.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -72,13 +56,21 @@ public class estudiant extends javax.swing.JFrame {
 
         jLabel3.setText("ADREÇA");
 
+        jTextPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTextPane1.setName(""); // NOI18N
         jScrollPane1.setViewportView(jTextPane1);
+        jTextPane1.getAccessibleContext().setAccessibleName("");
 
         jScrollPane2.setViewportView(jTextPane2);
 
         jScrollPane3.setViewportView(jTextPane3);
 
         jButton1.setText("Afejir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,6 +115,20 @@ public class estudiant extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String dni = jTextPane1.getText();
+        String nom = jTextPane2.getText();
+        String mail = jTextPane3.getText();
+
+            try {
+                gestor.afegirEstudiant(dni, nom, mail);
+            } catch (Exception ex) {
+                Logger.getLogger(estudiant.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            showMessageDialog(null, "Alumne s'ha afegit correctament");
+            setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

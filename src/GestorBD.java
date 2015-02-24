@@ -56,6 +56,13 @@ public class GestorBD {
         
     }
     
+    public ResultSet buscar(String x) throws SQLException{
+        Statement select = conn.createStatement();
+        String sql = "select * from " + x;
+        ResultSet m1 = select.executeQuery(sql);
+        return m1;
+    }
+    
     public List<Assginatura> getAsssignatures(String b) throws SQLException {
         
         String busc = b;

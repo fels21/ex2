@@ -118,9 +118,10 @@ public class assig_prof extends javax.swing.JFrame {
             
             List<Assginatura> list_assig = gestor.getAsssignatures(dni_prof);
             Iterator it_assig = list_assig.iterator();
+            jTextArea1.append("NOM\t"+"CREDITS\t"+"DESC\t"+"DNIPROFE\n");
             while(it_assig.hasNext()){
                 Assginatura assig = (Assginatura)it_assig.next();
-                jTextArea1.append(assig.getNom()+"\t"+assig.getCredits()+"        "+assig.getDescripcio()+
+                jTextArea1.append(assig.getNom()+"\t"+assig.getCredits()+"\t"+assig.getDescripcio()+
                         "\t"+assig.getDni_prof()+"\n\n");
             }
         } catch (SQLException ex) {
